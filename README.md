@@ -225,9 +225,10 @@ import {useTranslations} from 'next-intl';
 export default function HomePage() {
 
   const t = useTranslations('HomePage');    //نام صفحه ترجمه شده
-  > ├── message (1)
-│   ├── fa.json
-│   ├── en.json
+        >
+    ├── message (1)
+    │   ├── fa.json
+    │   ├── en.json .
 
   return <h1>{t('title')}</h1>;         //انتخاب نام متن
     > {
