@@ -357,10 +357,11 @@ const BaseLayout = (props: { children: ReactNode, viewport: string ,local:string
 }
 export default BaseLayout;
 ```
- .که در هر لایه مخصوص المانهایی وجود دارند که تنها در همان لایه رندر میشوند
- .همچنین در این لایه تمامی تامین کننده ها رو که مقادیرشان باید در تمام پروژه در دسترس باشد ،اضافه میکنیم 
- تامین کنندگانی مثل theme ,store ,locale,...
+.که در هر لایه مخصوص المانهایی وجود دارند که تنها در همان لایه رندر میشوند
 
+.همچنین در این لایه تمامی تامین کننده ها رو که مقادیرشان باید در تمام پروژه در دسترس باشد ،اضافه میکنیم 
+
+تامین کنندگانی مثل theme ,store ,locale,...
  ```
 'use client'
 import LOADING from "@components/atoms/LOADING";
