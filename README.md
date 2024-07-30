@@ -218,7 +218,7 @@ export default async function middleware(request: NextRequest) {
 ```
 
 ### و در نهایت برای استفاده از متن در یک صفحه به شکل زیر عمل میکنیم
-
+---
 ```
 import {useTranslations} from 'next-intl';
 
@@ -242,6 +242,7 @@ export default function HomePage() {
                 }
     }
 ```
+---
 
 
 
