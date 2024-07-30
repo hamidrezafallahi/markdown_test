@@ -21,21 +21,21 @@ npm run dev
 - - - - 
 # لیست تنظیمات صورت گرفته  #
 
-ساخته شده توسط فریمورک nextjs با typescript و بصورت approuter  :      "next": "14.2.3"  .
+ساخته شده توسط فریمورک nextjs با typescript و بصورت approuter  :      "next": "14.2.3"  
 
-چند زبانگی و تنظیم زمان بر اساس منطقه ورود به سایت  :      "next-intl": "^3.15.3"  .
+چند زبانگی و تنظیم زمان بر اساس منطقه ورود به سایت  :      "next-intl": "^3.15.3"  
 
-استفاده از کتابخانه ant design   :      "antd": "^5.18.3".
+استفاده از کتابخانه ant design   :      "antd": "^5.18.3"
 
-تنظیمات service worker & pwa  :      "@ducanh2912/next-pwa": "^10.2.7".
+تنظیمات service worker & pwa  :      "@ducanh2912/next-pwa": "^10.2.7"
 
-کتابخانه استایل دهی   :      "tailwindcss": "^3.4.1","tailwind-scrollbar": "^3.1.0" .
+کتابخانه استایل دهی   :      "tailwindcss": "^3.4.1","tailwind-scrollbar": "^3.1.0" 
 
-کتابخانه تست نویسی:"jest": "^29.7.0","ts-jest": "^29.1.4","@testing-library/react": "^15.0.7","@testing-library/jest-dom": "^6.4.5", .
+کتابخانه تست نویسی:"jest": "^29.7.0","ts-jest": "^29.1.4","@testing-library/react": "^15.0.7","@testing-library/jest-dom": "^6.4.5", 
 
-کتابخانه تبدیل تایپ اسکریپت به جاوا اسکریپت : "@babel/preset-typescript": "^7.24.6" .
+کتابخانه تبدیل تایپ اسکریپت به جاوا اسکریپت : "@babel/preset-typescript": "^7.24.6" 
 
-کتابخانه کنترل ورودی و خروجی :"typescript": "^5","ts-node": "^10.9.2" .
+کتابخانه کنترل ورودی و خروجی :"typescript": "^5","ts-node": "^10.9.2" 
 
 
 # ساختار پروژه  #
@@ -110,23 +110,22 @@ npm install next-intl
 که معماری پوشه بندی رو به شکل زیر درمی آورد .
 ```
 
-├── message (1) .
-│   ├── fa.json .
-│   ├── en.json .
-│   └── ... .
-├── next.config.mjs (2) .
-├── i18n.ts (3) .
-├── middleware.ts (4) .
-└── app .
-    └── [locale] .
-        ├── layout.tsx (5) .
-        └── page.tsx (6) .
+├── message (1) 
+│   ├── fa.json 
+│   ├── en.json 
+│   └── ... 
+├── next.config.mjs (2) 
+├── i18n.ts (3) 
+├── middleware.ts (4) 
+└── app 
+    └── [locale] 
+        ├── layout.tsx (5) 
+        └── page.tsx (6) 
 ```
 
 
 بعد از بوجود آوردن پوشه message  داخل آن به تعداد زبانهایی که برنامه قرار است پشتیبانی کند فایل جیسون ساخته ونام فایل جیسون باید دقیقا برابر با دو حرف اول زبان منطقه ی ورود به سایت باشد 
 ### en.json
-- - - -
 ```
 {
   "HomePage": {    //نام صفحه مورد نظر
@@ -136,7 +135,6 @@ npm install next-intl
 ```
 
 ### fa.json
-- - - -
 ```
 {
   "HomePage": {    //نام صفحه مورد نظر
@@ -146,28 +144,60 @@ npm install next-intl
 ```
 ## next.config.js
 ```
-const createNextIntlPlugin = require("next-intl/plugin"); .
+const createNextIntlPlugin = require("next-intl/plugin"); 
 
-const composedConfig = createNextIntlPlugin(withPWA(nextConfig)); .
+const composedConfig = createNextIntlPlugin(withPWA(nextConfig)); 
 
-module.exports = composedConfig; .
+module.exports = composedConfig; 
 ```
 ## i18n.js
 ```
- import {getRequestConfig} from 'next-intl/server'; .
-export default getRequestConfig (async ({locale}) => { .
-  const locales = ['en', 'fa']; .
-  const currLocale=locales.includes(locale)?locale:"fa" .
-    return { .
-        messages: (await import(`./message/${currLocale}.json`)).default .
-    } .
-}); .
+ import {getRequestConfig} from 'next-intl/server';
+
+export default getRequestConfig (async ({locale}) => {
+
+  const locales = ['en', 'fa'];
+
+  const currLocale=locales.includes(locale)?locale:"fa"
+
+    return {
+
+        messages: (await import(`./message/${currLocale}.json`)).default
+
+    }
+
+});
+
 
 ```
+## middleware.ts
+```
+import { NextRequest } from 'next/server';
 
+import createMiddleware from 'next-intl/middleware';
 
+export default async function middleware(request: NextRequest) {
 
+  const handleI18nRouting = createMiddleware({
 
+    locales: ['en', 'fa'],
+
+    defaultLocale: 'fa'
+
+  });
+
+  const response = handleI18nRouting(request);
+
+  return response;
+}
+```
+## تغییر پوشه بندی داخلی پوشه صفحات بصورت داینامیک و دریافت locale
+```
+└── app 
+    └── [locale] 
+        ├── layout.tsx (5) 
+        └── page.tsx (6) 
+```
 
 
 
