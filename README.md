@@ -313,7 +313,7 @@ export default function HomePage() {
 از این رو برای حذف کامل المانهای غیر ضروری صفحه با توجه به user-agent موجود در header میتوان نوع دستگاه را تشخیص داده و نوع قالب بندی سایت را تغییر دهیم 
 برای انجام این کار نیاز است در لایه های بالا این مقدار را مطابق کد زیر گرفته و مقایسه کنیم و در صورت وجود یا عدم وجود شرط لایه متناسب با دستگاه را بارگزاری کنیم و از رندر اعضای مخفی شده در DOM جلوگیری به عمل آوریم. 
 در این پروژه یک پوشه جداگانه از کامپوننتها و صفحات برای اعضای خاص که در موبایل و دسکتاپ متغیر میباشند بوجود آورده و این مساله رو در آن پوشه مدیریت میکنیم .
-----
+
 ```
 import React from "react";
 import BaseLayout from "../../layout/baseLayout/layout";
@@ -324,7 +324,7 @@ export default async function BodyLayout({ children, params: { local } }: { chil
   const deviceType = userAgent?.match(/Mobile|Android|iPhone|iPad|iPod|Opera Mini|BlackBerry|IEMobile/) ? 'mobile' : 'desktop';
   return (<html lang={local}>
     <body dir={local === 'fa' || local === undefined ? "rtl" : ""} >
-      <span style="color: #007bff"><BaseLayout viewport={deviceType} local={local}></span>
+      <BaseLayout viewport={deviceType} local={local}>
         {children}
       </BaseLayout>
     </body>
