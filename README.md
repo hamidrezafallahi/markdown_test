@@ -231,7 +231,7 @@ const DesktopLayout = (props: { children: ReactNode, local: string }) => {
     const { children, local } = props
     const route = usePathname()
     return (
-        `<NextIntlClientProvider  locale={local}>`
+        <NextIntlClientProvider  locale={local}>
         <ReduxProvider >
             <Theme>
 
@@ -258,10 +258,9 @@ import {useTranslations} from 'next-intl';
 
 export default function HomePage() {
 
-  const t = useTranslations('HomePage');    //نام صفحه ترجمه شده
+const t = useTranslations('HomePage');    //نام صفحه ترجمه شده
 
-
-  return <h1>{t('title')}</h1>;         //انتخاب نام متن
+return <h1>{t('title')}</h1>;         //انتخاب نام متن
 }
 ```
 
@@ -392,6 +391,32 @@ const DesktopLayout = (props: { children: ReactNode, local: string }) => {
 }
 export default DesktopLayout
  ```
+# public
+در این پوشه اطلاعات قابل تغییر پروژه قرار میگیرد 
+>تنظیمات آدرس سرور.
+
+>آیکون نرم افزار.
+
+>تنظیمات سرویس ورکر.
+
+>تنظیمات firebase.
+
+>تنظیمات PWA.
+
+## assets
+محل نگهداری عکس ها ،فونتها و آیکونها
+### fonts
+محل ذخیره سازی فونتها 
+### svgs
+محل ذخیره سازی آیکون ها برگرفته از فیگما  
+## AppSetting
+محل تغییر آدرس سرور ، به علت در دسترس بودن حتی بعد از build برنامه در اینجا تنظینات نگهداری میشود.
+## firebase massaging 
+محل ذخیره سازی تنظیمات سرور اعلان ها 
+## manifest 
+محل ذخیره سازی تنظیمات PWA
+## robots.txt
+محل تنظیمات خزنده های جستجوگر 
 
 
 
@@ -417,8 +442,73 @@ export default DesktopLayout
 
 
 
+# Markdown syntax guide
 
+## Headers
 
+# This is a Heading h1
+## This is a Heading h2
+###### This is a Heading h6
+
+## Emphasis
+
+*This text will be italic*  
+_This will also be italic_
+
+**This text will be bold**  
+__This will also be bold__
+
+_You **can** combine them_
+
+## Lists
+
+### Unordered
+
+* Item 1
+* Item 2
+* Item 2a
+* Item 2b
+
+### Ordered
+
+1. Item 1
+2. Item 2
+3. Item 3
+    1. Item 3a
+    2. Item 3b
+
+## Images
+
+![This is an alt text.](/image/sample.webp "This is a sample image.")
+
+## Links
+
+You may be using [Markdown Live Preview](https://markdownlivepreview.com/).
+
+## Blockquotes
+
+> Markdown is a lightweight markup language with plain-text-formatting syntax, created in 2004 by John Gruber with Aaron Swartz.
+>
+>> Markdown is often used to format readme files, for writing messages in online discussion forums, and to create rich text using a plain text editor.
+
+## Tables
+
+| Left columns  | Right columns |
+| ------------- |:-------------:|
+| left foo      | right foo     |
+| left bar      | right bar     |
+| left baz      | right baz     |
+
+## Blocks of code
+
+```
+let message = 'Hello world';
+alert(message);
+```
+
+## Inline code
+
+This web site is using `markedjs/marked`.
 # Markdown Cheatsheet<a name="TOP"></a>
 
 ---
