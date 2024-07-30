@@ -6,7 +6,7 @@
 ```bash 
 npm run dev
 ```
-# یا
+-یا-
 
 ```bash
  yarn dev
@@ -101,9 +101,29 @@ npm run dev
 #  تنظیمات کتابخانه ها   #
 - - - -
 ##  تنظیمات globalization   ##
+ابتدا نیاز به نصب یکی از کتابخانه های i18n رو دارید .
+ما در این پروژه از کتابخانه ی next-intl استفاده میکنیم.
 
-
-
+```bash 
+npm install next-intl
+```
+├── src
+│   ├── controller
+│   │   ├── **/*.css
+│   ├── views
+│   ├── model
+│   ├── index.js
+├── public
+│   ├── css
+│   │   ├── **/*.css
+│   ├── images
+│   ├── js
+│   ├── index.html
+├── dist (or build)
+├── node_modules
+├── package.json
+├── package-lock.json
+└── .gitignore
 
 
 
