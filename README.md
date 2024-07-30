@@ -107,38 +107,27 @@ npm run dev
 ```bash 
 npm install next-intl
 ```
-که معماری پوشه بندی رو به شکل زیر درمی آورد .
-    ├── message (1) .
-    │   ├── fa.json .
-    │   ├── en.json .
-    │   └── ... .
-    ├── next.config.mjs (2) .
-    ├── i18n.ts (3) .
-    ├── middleware.ts (4) .
-    └── app .
-        └── [locale] .
-            ├── layout.tsx (5) .
-            └── page.tsx (6) .
-بعد از بوجود آوردن پوشه message  داخل آن به تعداد زبانهایی که برنامه قرار است پشتیبانی کند فایل جیسون ساخته ونام فایل جیسون باید دقیقا برابر با دو حرف اول زبان منطقه ی ورود به سایت باشد 
-### en.json
-- - - -
-```
-{
-  "HomePage": {    //نام صفحه مورد نظر
-    "title": "Hello world!" // نام متن
-  }
-}
-```
+├── src
+│   ├── controller
+│   │   ├── **/*.css
+│   ├── views
+│   ├── model
+│   ├── index.js
+├── public
+│   ├── css
+│   │   ├── **/*.css
+│   ├── images
+│   ├── js
+│   ├── index.html
+├── dist (or build)
+├── node_modules
+├── package.json
+├── package-lock.json
+└── .gitignore
 
-### fa.json
-- - - -
-```
-{
-  "HomePage": {    //نام صفحه مورد نظر
-    "title": "سلام دنیا "     //نام متن به همراه خود متن 
-  }
-}
-```
+
+
+
 
 
 
