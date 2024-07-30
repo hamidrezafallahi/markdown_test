@@ -231,7 +231,7 @@ const DesktopLayout = (props: { children: ReactNode, local: string }) => {
     const { children, local } = props
     const route = usePathname()
     return (
-        <NextIntlClientProvider  locale={local}>
+        `<NextIntlClientProvider  locale={local}>`
         <ReduxProvider >
             <Theme>
 
