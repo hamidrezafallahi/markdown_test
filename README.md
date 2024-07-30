@@ -144,6 +144,18 @@ npm install next-intl
   }
 }
 ```
+## next.config.js
+```
+const createNextIntlPlugin = require("next-intl/plugin"); .
+
+const composedConfig = createNextIntlPlugin(withPWA(nextConfig)); .
+
+module.exports = composedConfig; .
+```
+
+
+
+
 
 
 
