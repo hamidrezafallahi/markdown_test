@@ -324,7 +324,7 @@ export default async function BodyLayout({ children, params: { local } }: { chil
   const deviceType = userAgent?.match(/Mobile|Android|iPhone|iPad|iPod|Opera Mini|BlackBerry|IEMobile/) ? 'mobile' : 'desktop';
   return (<html lang={local}>
     <body dir={local === 'fa' || local === undefined ? "rtl" : ""} >
-      <BaseLayout viewport={deviceType} local={local}>
+      <span style="color: #007bff"><BaseLayout viewport={deviceType} local={local}></span>
         {children}
       </BaseLayout>
     </body>
