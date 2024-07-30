@@ -225,21 +225,33 @@ import {useTranslations} from 'next-intl';
 export default function HomePage() {
 
   const t = useTranslations('HomePage');    //نام صفحه ترجمه شده
-    
+
 
   return <h1>{t('title')}</h1>;         //انتخاب نام متن
 }
 ```
-   >├── message (1).
+
+    ├── message (1)
     │   ├── fa.json
     │   ├── en.json
-    
-     
+
+```
     {
   "HomePage": {    //نام صفحه مورد نظر
     "title": "Hello world!" // نام متن
-  }
-}
+                }
+    }
+```
+
+
+
+
+
+
+
+
+
+
 
 
 
