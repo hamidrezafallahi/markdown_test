@@ -3,10 +3,14 @@
 اول باید سرور توسعه رو اجرا کنید :
 
 
-```bash npm run dev```
+```bash 
+npm run dev
+```
 # یا
 
-```bash yarn dev```
+```bash
+ yarn dev
+ ```
 
 
 
