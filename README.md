@@ -16,15 +16,15 @@ yarn dev
 ===================
 - - - - 
 # لیست تنظیمات صورت گرفته  #
-    
-    ند زبانگی و تنظیم زمان بر اساس منطقه ورود به سایت  :      "next-intl": "^3.15.3",
-    ستفاده از کتابخانه ant design   :      "antd": "^5.18.3",
-    نظیمات service worker & pwa  :      "@ducanh2912/next-pwa": "^10.2.7",
-    تابخانه استایل دهی   :      "tailwindcss": "^3.4.1","tailwind-scrollbar": "^3.1.0",
-    تابخانه تست نویسی:"jest": "^29.7.0","ts-jest": "^29.1.4","@testing-library/react": "^15.0.7","@testing-library/jest-dom": "^6.4.5",
-    تابخانه تبدیل تایپ اسکریپت به جاوا اسکریپت : "@babel/preset-typescript": "^7.24.6",
-    تابخانه کنترل ورودی و خروجی :"typescript": "^5","ts-node": "^10.9.2",
-    
+
+چند زبانگی و تنظیم زمان بر اساس منطقه ورود به سایت  :      "next-intl": "^3.15.3",
+استفاده از کتابخانه ant design   :      "antd": "^5.18.3",
+تنظیمات service worker & pwa  :      "@ducanh2912/next-pwa": "^10.2.7",
+کتابخانه استایل دهی   :      "tailwindcss": "^3.4.1","tailwind-scrollbar": "^3.1.0",
+کتابخانه تست نویسی:"jest": "^29.7.0","ts-jest": "^29.1.4","@testing-library/react": "^15.0.7",
+کتابخانه تبدیل تایپ اسکریپت به جاوا اسکریپت : "@babel/preset-typescript": "^7.24.6",
+کتابخانه کنترل ورودی و خروجی :"typescript": "^5","ts-node": "^10.9.2",
+
 
 
 
