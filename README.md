@@ -198,6 +198,17 @@ export default async function middleware(request: NextRequest) {
         ├── layout.tsx (5) 
         └── page.tsx (6) 
 ```
+### و در نهایت برای استفاده از متن در یک صفحه به شکل زیر عمل میکنیم 
+```
+import {useTranslations} from 'next-intl';
+ 
+export default function HomePage() {
+
+  const t = useTranslations('HomePage');    //نام صفحه ترجمه شده 
+
+  return <h1>{t('title')}</h1>;         //انتخاب نام متن
+}
+```
 
 
 
