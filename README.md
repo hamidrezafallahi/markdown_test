@@ -442,51 +442,6 @@ export default DesktopLayout
 در صفحه ی `index.tsx` تمامی درخواستها ادغام میشود .
 و به عنوان خروجی اصلی سرویس ها به `store` ارسال میشود .
 
-### مدیریت ارور ها در پاسخ سرور `.services\rtkQueryErrorLogger.ts`
-
-همگی بصورت اعلان باید نمایش داده شوند و مدیریت آن توسط یک middleware از درون خود ریداکس کوئری رخ میدهد.
-که این middleware نیز بصورت جداگانه به `store` ارسال میشود.
-
-این رفتار توسط فایل `rtkQueryErrorLogger`مدیریت میشود.
-بدین صورت که متدی داخل ریداکس وجود دارد به نام `isRejectedWithValue` که دور درخواست پیچیده میشود به شکل زیر و در صورت پاسخ ارور یک فعالیتی را انجام میدهد.
-
-```
-export const rtkQueryErrorLogger: Middleware = () => (next) => (action) => {
-  if (isRejectedWithValue(action)) {
-    if (action.payload.status !== 401) {
-        //اینجا باید یه بار رفرش توکن با سرویس لاگین صدا زده بشه و پارامتر رفرش توکن فرستاده بشه
-        //بعد اگه دوباره به همین ارور خورد پاپ اپ لاگین یا هدات شود به لندگینگ یا لاگین ...
-    showToast({message:"The HTTP status code 401, often denoted as UNAUTHORIZED , signifies that the client lacks proper authentication credentials or has provided invalid credentials. In simpler terms, the server has failed to identify the user"})
-    }
-  }
-  return next(action);
-};
-
-```
-
-همچنین در قسمت middleware به store اضافه میگردد.`services\index.tsx`
-```
-const ServiceRootReducer = () => {
-    return {
-        serviceReducer: {
-            [comAuth.reducerPath]: comAuth.reducer,
-            [ComAuthToken.reducerPath]: ComAuthToken.reducer,
-        },
-        serviceMiddleware: [
-            comAuth.middleware,
-            ComAuthToken.middleware,
-            rtkQueryErrorLogger          //در این قسمت به درخواستهای ما اضافه میگردد
-        ]
-
-    }
-
-}
-
-export default ServiceRootReducer;
-
-```
-
-
 ## مدیریت درخواست های احراز شده و احراز نشده 
 
 برای کتابخانه ی `RTK Query` متدی برای آدرس پیشفرض درخواست وجود دارد به نام  `fetchBaseQuery `.
@@ -546,6 +501,10 @@ export const ComAuthToken = createApi({
     })
   })
 });
+
+export const { useGetRoleQuery} = ComAuthToken; // {hook}=middleware
+export const { useLoginMutation } = comAuth;
+
 ```
 و در نهایت از این دو سرویس ساخته شده دو هوک و دو middleware به شکل زیر استخراج میگردد 
 
@@ -553,11 +512,7 @@ export const ComAuthToken = createApi({
 
 از middleware  ها برای ذخیره سازی مقادیر برگشتی استفاده میگردد.
 
-```
-export const { useGetRoleQuery} = ComAuthToken; // {hook}=middleware
-export const { useLoginMutation } = comAuth;
-```
- و به شکل زیر به مجموعه ی دیگر سرویسها متصل میگردد.`\services\index.tsx`
+و به شکل زیر به مجموعه ی دیگر سرویسها متصل میگردد.`\services\index.tsx`
  ```
 const ServiceRootReducer = () => {
 
@@ -680,6 +635,71 @@ const loginSubmit = async () => {
 
 export default Login;
 ```
+
+### مدیریت ارور ها در پاسخ سرور `.services\rtkQueryErrorLogger.ts`
+
+همگی بصورت اعلان باید نمایش داده شوند و مدیریت آن توسط یک middleware از درون خود ریداکس کوئری رخ میدهد.
+که این middleware نیز بصورت جداگانه به `store` ارسال میشود.
+
+این رفتار توسط فایل `rtkQueryErrorLogger`مدیریت میشود.
+بدین صورت که متدی داخل ریداکس وجود دارد به نام `isRejectedWithValue` که دور درخواست پیچیده میشود به شکل زیر و در صورت پاسخ ارور یک فعالیتی را انجام میدهد.
+
+```
+export const rtkQueryErrorLogger: Middleware = () => (next) => (action) => {
+  if (isRejectedWithValue(action)) {
+    if (action.payload.status !== 401) {
+        //اینجا باید یه بار رفرش توکن با سرویس لاگین صدا زده بشه و پارامتر رفرش توکن فرستاده بشه
+        //بعد اگه دوباره به همین ارور خورد پاپ اپ لاگین یا هدات شود به لندگینگ یا لاگین ...
+    showToast({message:"The HTTP status code 401, often denoted as UNAUTHORIZED , signifies that the client lacks proper authentication credentials or has provided invalid credentials. In simpler terms, the server has failed to identify the user"})
+    }
+  }
+  return next(action);
+};
+
+```
+
+همچنین در قسمت middleware به store اضافه میگردد.`services\index.tsx`
+```
+const ServiceRootReducer = () => {
+    return {
+        serviceReducer: {
+            [comAuth.reducerPath]: comAuth.reducer,
+            [ComAuthToken.reducerPath]: ComAuthToken.reducer,
+        },
+        serviceMiddleware: [
+            comAuth.middleware,
+            ComAuthToken.middleware,
+            rtkQueryErrorLogger          //در این قسمت به درخواستهای ما اضافه میگردد
+        ]
+
+    }
+
+}
+
+export default ServiceRootReducer;
+
+```
+<!-- slices -->
+
+## تکه های حافظه (اسلایس ها ) `.\slice`
+----
+در ابتدا باید ذکر کرد که در این پروژه به علت حجم بسیار بالای ورودی های هر فرم و امکان جا به جایی بین صفحات و نیاز بر نگهداری مقادیر داخل فرم ها ،باید مدیریت کاملی بر روی تمامی ورودی ها شکل گیرد .
+از این رو روش های مدیریت را با هم بررسی میکنیم 
+سه روش مدیریت مقادیر وجود دارد 
+    مدیریت مقادیر داخل ورودی ها توسط states
+    مدیریت مقادیر داخل ورودی ها توسط lifting state up
+    مدیریت مقادیر داخل ورودی ها توسط state managment
+>اگر از استیت ها بخواهیم استفاده کنیم با هر بار تغییر صفحات پاک میشود 
+>اگر از لیفتینگ استیت بخواهیم استفاده کنیم به دلیل تعداد بسیار ورودی ها و تغییر استیت در لایه ی بالا،
+>به اجبار همه ی کامپوننت های داخل والد مجددا رندر میشوند که با توجه به لیستهای بلند داخل پروژه اصلا کار منطقی ای نیست 
+در نهایت با سیستم مدیریت استیت ها میتوان به خوبی این مساله را مدیریت کرد 
+در ابتدا باید مالکیت هر ورودی مشخص شود 
+به عنوان مثال هر ورودی برای یک فرم خاصی هست که آیدی منحصری  دارد و آن ورودی در حال ذخیره سازی مقداری است که آن هم نام مشخص و منحصری دارد 
+پس اگر تمام حافظه را یک آبجکت در نظر بگیریم 
+یکی از المانها باید فرمها باشد چون ممکن است کاربر در چند صفحه مختلف فرمهای مختلفی را باز کند 
+
+
+    
 
 # Markdown syntax guide
 
