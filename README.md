@@ -526,7 +526,7 @@ export const baseQueryByToken = fetchBaseQuery({ baseUrl: AppInfo.AppSetting.Api
 از این پس برای سرویسهایی که نیاز به توکن دارند از مقدار `baseQueryByToken` استفاده میکنیم .
 
 
-## ساخنار `RTK QUERY` و بدنه ی سرویس
+## ساختار `RTK QUERY` و بدنه ی سرویس
 برای مدیریت درخواستها به شکل زیر عمل میکنیم 
 برای درخواستهای بدون توکن از `baseQuery` استفاده میکنیم 
 ```
@@ -661,6 +661,44 @@ const DesktopLayout = (props: { children: ReactNode, local: string }) => {
     );
 }
 export default DesktopLayout
+```
+
+و در این مثال شما نحوه ی استفاده از این هوک را میبینید
+```
+
+```
+"use client"
+import Btn from '@components/atoms/defaultElements/BTN';
+import { usePathname, useRouter } from 'next/navigation';
+import { useLoginMutation } from '@services/Auth';
+import { createCookieInHour, getElementValue} from '@utils/core';
+import INPUT from '@components/atoms/defaultElements/INPUT';
+import { Type } from '@components/atoms/defaultElements/interface';
+
+const Login = () => {
+    const pathname = usePathname()
+    const {push}=useRouter()
+    const [login,{data,status,isSuccess,isLoading,reset}] = useLoginMutation()  //در این قسمت هوک صدا زده شده
+  if(data?.access_token){
+    createCookieInHour("autt",data.access_token,6) //در این قسمت توکن ساخته شده 
+    reset()
+    push(`${pathname}/desktop`) //پس از لاگین با ساخت توکن به صفحه ی بعدی هدایت میشود
+  }
+
+const loginSubmit = async () => { 
+        const password=getElementValue({formId,name:"txt_password",type:Type.Text}) //مقادیر ورودی از داخل ریداکس خوانده میشوند
+        const username=getElementValue({formId,name:"txt_username",type:Type.Text}) // در قسمت اسلایس منطق این خط آورده شده 
+     login({ Grant_Type: "password", Password:password , UserName: username, Refresh_Token: "" })
+     // تابع درخواست لاگین از داخل هوک اینجا صدا زده میشود و مقادیر لازم پاس داده میشود 
+}
+  return (
+      <INPUT config={{formId,name:"txt_username",caption:"نام کاربری",type:Type.Text}}/>
+      <INPUT  mode='Password' config={{formId,name:"txt_password",caption:"رمز عبور",type:Type.Text}}/>
+      <Btn loading={isLoading} onClick={loginSubmit}>ورود</Btn>
+  )
+}
+
+export default Login;
 ```
 
 # Markdown syntax guide
