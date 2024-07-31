@@ -484,32 +484,24 @@ export const rtkQueryErrorLogger: Middleware = () => (next) => (action) => {
 ```
 
 همچنین در قسمت middleware به store اضافه میگردد.
-
+```
 const ServiceRootReducer = () => {
+    return {
+        serviceReducer: {
+            [comAuth.reducerPath]: comAuth.reducer,
+            [ComAuthToken.reducerPath]: ComAuthToken.reducer,
+        },
+        serviceMiddleware: [
+            comAuth.middleware,
+            ComAuthToken.middleware,
+            rtkQueryErrorLogger          //در این قسمت به درخواستهای ما اضافه میگردد
+        ]
 
-return {
-
-    serviceReducer: {
-
-        [comAuth.reducerPath]: comAuth.reducer,
-
-        [ComAuthToken.reducerPath]: ComAuthToken.reducer,
-
-    },
-
-    serviceMiddleware: [
-
-        comAuth.middleware,
-
-        ComAuthToken.middleware,
-        
-        `rtkQueryErrorLogger`
-    ]
-}
+    }
 
 }
 
-export default ServiceRootReducer;
+export default ServiceRootReducer;```
 
 # Markdown syntax guide
 
