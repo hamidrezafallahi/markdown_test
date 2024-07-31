@@ -509,7 +509,7 @@ export default ServiceRootReducer;
 ## مدیریت درخواست های احراز شده و احراز نشده 
 
 برای کتابخانه ی `RTK Query` متدی برای آدرس پیشفرض درخواست وجود دارد به نام  `fetchBaseQuery `.
-که ما برای درخواست های بدون توکن و با توکن دو متغیر مینویسیم و به یکی از آنها مقدار توکن رو پاس میدهیم به شکل زیر .
+که ما برای درخواست های بدون توکن و با توکن دو متغیر مینویسیم و به یکی از آنها مقدار توکن رو پاس میدهیم به شکل زیر .`services\customBaseQuery.ts`
 
 ```
 import { fetchBaseQuery } from "@reduxjs/toolkit/query";
@@ -520,7 +520,7 @@ export const baseQuery = fetchBaseQuery({ baseUrl: AppInfo.AppSetting.ApiUrl, })
 export const baseQueryByToken = fetchBaseQuery({ baseUrl: AppInfo.AppSetting.ApiUrl,
   headers: { 'authorization': `Bearer ${token}` }})
 ```
-برای به دست آوردن لینک سرور میتوان از فایل جیسون موجود در `AppSetting`استفاده کرد.
+برای به دست آوردن لینک سرور میتوان از فایل جیسون موجود در `AppSetting`استفاده کرد.`\public\AppSetting.json`
 
 
 از این پس برای سرویسهایی که نیاز به توکن دارند از مقدار `baseQueryByToken` استفاده میکنیم .
@@ -547,7 +547,7 @@ export const comAuth = createApi({
   })
 });
 ```
-برای درخواستهای با توکن از `baseQueryByToken` استفاده میکنیم 
+برای درخواستهای با توکن از `baseQueryByToken` استفاده میکنیم .`\services\Auth\index.ts`
 ```
 export const ComAuthToken = createApi({
   reducerPath: "ComAuthToken",  
@@ -571,7 +571,7 @@ export const ComAuthToken = createApi({
 export const { useGetRoleQuery} = ComAuthToken; // {hook}=middleware
 export const { useLoginMutation } = comAuth;
 ```
- و به شکل زیر به مجموعه ی دیگر سرویسها متصل میگردد
+ و به شکل زیر به مجموعه ی دیگر سرویسها متصل میگردد.`\services\index.tsx`
  ```
 const ServiceRootReducer = () => {
 
@@ -591,7 +591,7 @@ const ServiceRootReducer = () => {
 
 export default ServiceRootReducer;
  ```
-و  به شکل زیر به بدنه ی حافظه متصل میگردد
+و  به شکل زیر به بدنه ی حافظه متصل میگردد.`\store\index.tsx`
 
 ```
 import { configureStore } from '@reduxjs/toolkit';  
@@ -612,7 +612,7 @@ const AppReduxStore = configureStore({
 
 export default AppReduxStore;
 ```
-و توسط یک provider به عنوان حافظه ی اصلی به کار برده میشود .
+و توسط یک provider به عنوان حافظه ی اصلی به کار برده میشود .`\store\Provider\index.tsx`
 ```
 import AppReduxStore from '@store/index'
 import { Provider } from 'react-redux';
