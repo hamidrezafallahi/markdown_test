@@ -570,7 +570,7 @@ export const ComAuthToken = createApi({
 
 هوک ها برای درخواست دادن به کار میروند .
 
-middleware  ها برای ذخیره سازی مقادیر برگشتی استفاده میگردد.
+از middleware  ها برای ذخیره سازی مقادیر برگشتی استفاده میگردد.
 
 ```
 export const { useGetRoleQuery} = ComAuthToken; // {hook}=middleware
