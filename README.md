@@ -132,7 +132,7 @@ npm install next-intl
         └── page.tsx (6)
 ```
 
-بعد از بوجود آوردن پوشه message داخل آن به تعداد زبانهایی که برنامه قرار است پشتیبانی کند فایل جیسون ساخته ونام فایل جیسون باید دقیقا برابر با دو حرف اول زبان منطقه ی ورود به سایت باشد
+بعد از بوجود آوردن پوشه message داخل آن به تعداد زبانهایی که برنامه قرار است پشتیبانی کند فایل جیسون ساخته ونام فایل جیسون باید دقیقا برابر با دو حرف اول زبان منطقه ی ورود به سایت باشد`\message\en.json`
 
 ### en.json
 
@@ -218,7 +218,7 @@ export default async function middleware(request: NextRequest) {
         └── page.tsx (6)
 ```
 
-## انتشار مقدار locale در تمامی مسیر های زیر مجموعه در قالب props
+## انتشار مقدار locale در تمامی مسیر های زیر مجموعه در قالب props `\layout\mainLayout\desktopSizeLayout\index.tsx`
 
 ```
 'use client'
@@ -253,7 +253,7 @@ export default DesktopLayout
     ;
 ```
 
-### و در نهایت برای استفاده از متن در یک صفحه به شکل زیر عمل میکنیم
+### و در نهایت برای استفاده از متن در یک صفحه به شکل زیر عمل میکنیم `\app\[local]\page.tsx`
 
 ---
 
@@ -324,7 +324,7 @@ return <h1>{t('title')}</h1>;         //انتخاب نام متن
 همچنین اگر با دسکتاپ وارد سایت شوید نیازی به navigation bar نخواهید داشت.
 از این رو برای حذف کامل المانهای غیر ضروری صفحه با توجه به user-agent موجود در header میتوان نوع دستگاه را تشخیص داده و نوع قالب بندی سایت را تغییر دهیم
 برای انجام این کار نیاز است در لایه های بالا این مقدار را مطابق کد زیر گرفته و مقایسه کنیم و در صورت وجود یا عدم وجود شرط لایه متناسب با دستگاه را بارگزاری کنیم و از رندر اعضای مخفی شده در DOM جلوگیری به عمل آوریم.
-در این پروژه یک پوشه جداگانه از کامپوننتها و صفحات برای اعضای خاص که در موبایل و دسکتاپ متغیر میباشند بوجود آورده و این مساله رو در آن پوشه مدیریت میکنیم .
+در این پروژه یک پوشه جداگانه از کامپوننتها و صفحات برای اعضای خاص که در موبایل و دسکتاپ متغیر میباشند بوجود آورده و این مساله رو در آن پوشه مدیریت میکنیم . `\app\[local]\layout.tsx`
 
 ```
 import React from "react";
@@ -345,7 +345,7 @@ export default async function BodyLayout({ children, params: { local } }: { chil
 }
 ```
 
-و در نهایت در لایه اصلی دو لایه موبایل و دسکتاپ رو از همدیگر جدا میکنیم
+و در نهایت در لایه اصلی دو لایه موبایل و دسکتاپ رو از همدیگر جدا میکنیم`\layout\baseLayout\layout.tsx`
 
 ```
 import { ReactNode } from "react";
@@ -376,7 +376,7 @@ export default BaseLayout;
 
 .همچنین در این لایه تمامی تامین کننده ها رو که مقادیرشان باید در تمام پروژه در دسترس باشد ،اضافه میکنیم
 
-تامین کنندگانی مثل theme ,store ,locale,...
+تامین کنندگانی مثل theme ,store ,locale,... `\layout\mainLayout\desktopSizeLayout\index.tsx`
 
 ```
 'use client'
@@ -423,7 +423,7 @@ export default DesktopLayout
 
 > تنظیمات PWA.
 
-## assets
+### assets
 
 محل نگهداری عکس ها ،فونتها و آیکونها
 
@@ -453,7 +453,7 @@ export default DesktopLayout
 
 <!-- services -->
 
-## سرویس ها
+## سرویس ها `.\services`
 
 یکی از دو قسمت اصلی حافظه میباشد که کار مدیریت درخواستها را بر عهده دارد.
 
@@ -461,7 +461,7 @@ export default DesktopLayout
 در صفحه ی `index.tsx` تمامی درخواستها ادغام میشود .
 و به عنوان خروجی اصلی سرویس ها به `store` ارسال میشود .
 
-### مدیریت ارور ها در پاسخ سرور
+### مدیریت ارور ها در پاسخ سرور `.services\rtkQueryErrorLogger.ts`
 
 همگی بصورت اعلان باید نمایش داده شوند و مدیریت آن توسط یک middleware از درون خود ریداکس کوئری رخ میدهد.
 که این middleware نیز بصورت جداگانه به `store` ارسال میشود.
@@ -483,7 +483,7 @@ export const rtkQueryErrorLogger: Middleware = () => (next) => (action) => {
 
 ```
 
-همچنین در قسمت middleware به store اضافه میگردد.
+همچنین در قسمت middleware به store اضافه میگردد.`services\index.tsx`
 ```
 const ServiceRootReducer = () => {
     return {
@@ -526,7 +526,7 @@ export const baseQueryByToken = fetchBaseQuery({ baseUrl: AppInfo.AppSetting.Api
 از این پس برای سرویسهایی که نیاز به توکن دارند از مقدار `baseQueryByToken` استفاده میکنیم .
 
 
-## ساختار `RTK QUERY` و بدنه ی سرویس
+## ساختار `RTK QUERY` و بدنه ی سرویس `services\Auth\index.ts`
 برای مدیریت درخواستها به شکل زیر عمل میکنیم 
 برای درخواستهای بدون توکن از `baseQuery` استفاده میکنیم 
 ```
@@ -663,8 +663,7 @@ const DesktopLayout = (props: { children: ReactNode, local: string }) => {
 export default DesktopLayout
 ```
 
-و در این مثال شما نحوه ی استفاده از این هوک را میبینید
-```
+و در این مثال شما نحوه ی استفاده از این هوک را میبینید.`components\templates\Login\index.tsx`
 
 ```
 "use client"
@@ -692,7 +691,7 @@ const loginSubmit = async () => {
      // تابع درخواست لاگین از داخل هوک اینجا صدا زده میشود و مقادیر لازم پاس داده میشود 
 }
   return (
-      <INPUT config={{formId,name:"txt_username",caption:"نام کاربری",type:Type.Text}}/>
+      <INPUT config={{formId,name:"txt_username",caption:"نام کاربری",type:Type.Text}}/> //کامپوننت های شخصی سازی شده 
       <INPUT  mode='Password' config={{formId,name:"txt_password",caption:"رمز عبور",type:Type.Text}}/>
       <Btn loading={isLoading} onClick={loginSubmit}>ورود</Btn>
   )
