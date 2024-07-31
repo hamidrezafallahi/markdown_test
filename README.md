@@ -517,9 +517,10 @@ import { AppInfo } from '../public/AppSetting.json';
 import { getCookie } from "@utils/core";
  const token =''// getCookie("autt").val
 export const baseQuery = fetchBaseQuery({ baseUrl: AppInfo.AppSetting.ApiUrl, })
-export const baseQueryByToken = fetchBaseQuery({ baseUrl: AppInfo.AppSetting.ApiUrl,  headers: { 'authorization': `Bearer ${token}` }})
+export const baseQueryByToken = fetchBaseQuery({ baseUrl: AppInfo.AppSetting.ApiUrl,
+  headers: { 'authorization': `Bearer ${token}` }})
 ```
-از این پس برای سرویسهایی که نیلز به توکن دارند از مقدار `baseQueryByToken` استفاده میکنیم .
+از این پس برای سرویسهایی که نیاز به توکن دارند از مقدار `baseQueryByToken` استفاده میکنیم .
 
 
 
