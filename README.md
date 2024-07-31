@@ -566,7 +566,12 @@ export const ComAuthToken = createApi({
   })
 });
 ```
-و در نهایت از این دو سرویس ساخته شده دو هوک به شکل زیر استخراج میگردد 
+و در نهایت از این دو سرویس ساخته شده دو هوک و دو middleware به شکل زیر استخراج میگردد 
+
+هوک ها برای درخواست دادن به کار میروند .
+
+middleware  ها برای ذخیره سازی مقادیر برگشتی استفاده میگردد.
+
 ```
 export const { useGetRoleQuery} = ComAuthToken; // {hook}=middleware
 export const { useLoginMutation } = comAuth;
