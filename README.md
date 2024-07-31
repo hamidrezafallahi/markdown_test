@@ -501,7 +501,8 @@ const ServiceRootReducer = () => {
 
 }
 
-export default ServiceRootReducer;```
+export default ServiceRootReducer;
+```
 
 # Markdown syntax guide
 
