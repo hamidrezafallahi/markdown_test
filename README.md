@@ -486,7 +486,6 @@ export const rtkQueryErrorLogger: Middleware = () => (next) => (action) => {
 همچنین در قسمت middleware به store اضافه میگردد.
 
 const ServiceRootReducer = () => {
-
     return {
         serviceReducer: {
             [comAuth.reducerPath]: comAuth.reducer,
