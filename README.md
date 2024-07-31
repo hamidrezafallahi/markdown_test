@@ -502,7 +502,26 @@ const ServiceRootReducer = () => {
 }
 
 export default ServiceRootReducer;
+
 ```
+
+
+## مدیریت درخواست های احراز شده و احراز نشده 
+
+برای کتابخانه ی `RTK Query` متدی برای آدرس پیشفرض درخواست وجود دارد به نام  `fetchBaseQuery `.
+که ما برای درخواست های بدون توکن و با توکن دو متغیر مینویسیم و به یکی از آنها مقدار توکن رو پاس میدهیم به شکل زیر .
+
+```
+import { fetchBaseQuery } from "@reduxjs/toolkit/query";
+import { AppInfo } from '../public/AppSetting.json';
+import { getCookie } from "@utils/core";
+ const token =''// getCookie("autt").val
+export const baseQuery = fetchBaseQuery({ baseUrl: AppInfo.AppSetting.ApiUrl, })
+export const baseQueryByToken = fetchBaseQuery({ baseUrl: AppInfo.AppSetting.ApiUrl,  headers: { 'authorization': `Bearer ${token}` }})
+```
+از این پس برای سرویسهایی که نیلز به توکن دارند از مقدار `baseQueryByToken` استفاده میکنیم .
+
+
 
 # Markdown syntax guide
 
