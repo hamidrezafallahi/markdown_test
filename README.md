@@ -626,7 +626,7 @@ const ReduxProvider = (props: any) => {
 
 export default ReduxProvider;
 ```
-و در نهایت در یک لایه سطح باللا به بدنه ی پروژه وسل میشود 
+و در نهایت در یک لایه سطح بالا به بدنه ی پروژه وصل میشود`\layout\mainLayout\desktopSizeLayout\index.tsx` . 
 ```
 'use client'
 import LOADING from "@components/atoms/LOADING";
