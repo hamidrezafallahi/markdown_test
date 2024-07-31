@@ -18,7 +18,6 @@ npm run dev
 شما میتوانید محتوای صفحات را ویرایش کنید با شروع تغییر در فایل `app/page.tsx`.صفحه بصورت خودکار بروز میشود اگر شما تغییراتی را اعمال کنید .
 ادرس سایت پابلیش شده <a name="TOP"></a>
 
-
 ---
 
 # لیست تنظیمات صورت گرفته
@@ -104,7 +103,9 @@ npm run dev
 # تنظیمات کتابخانه ها
 
 ---
+
 <!-- تنظیمات زبان برنامه  -->
+
 # تنظیمات globalization
 
 ابتدا نیاز به نصب یکی از کتابخانه های i18n رو دارید .
@@ -216,6 +217,7 @@ export default async function middleware(request: NextRequest) {
         ├── layout.tsx (5)
         └── page.tsx (6)
 ```
+
 ## انتشار مقدار locale در تمامی مسیر های زیر مجموعه در قالب props
 
 ```
@@ -252,7 +254,9 @@ export default DesktopLayout
 ```
 
 ### و در نهایت برای استفاده از متن در یک صفحه به شکل زیر عمل میکنیم
+
 ---
+
 ```
 import {useTranslations} from 'next-intl';
 
@@ -275,11 +279,17 @@ return <h1>{t('title')}</h1>;         //انتخاب نام متن
                 }
     }
 ```
+
 ---
+
 <!-- منطق پوشه بندی کامپوننت ها  -->
-# منطق پوشه بندی کامپوننت ها 
+
+# منطق پوشه بندی کامپوننت ها
+
 ---
-پوشه بندی داخل کامپوننت ها به صورت زیر میباشد 
+
+پوشه بندی داخل کامپوننت ها به صورت زیر میباشد
+
 ```
  ├── components                     //پوشه اصلی کامپوننتها
  |   ├── atoms                      //کوچکترین جزء یک ساختار رو در اینجا ذخیره میکنند
@@ -290,27 +300,30 @@ return <h1>{t('title')}</h1>;         //انتخاب نام متن
  |   |   |   ├── INPUT              //کامپوننت ورودی برگرفته از Ant Design
  |   |   |   |   └── index.tsx
  |   |   |   └── ...
- |   |   ├── iconComponents         //پوشه تمامی آیکونها که تبدیل به کامپوننت شدند برای تغییر و استایل دهی راحت تر 
- |   |   |   ├── PlusOutline.tsx 
+ |   |   ├── iconComponents         //پوشه تمامی آیکونها که تبدیل به کامپوننت شدند برای تغییر و استایل دهی راحت تر
+ |   |   |   ├── PlusOutline.tsx
  |   |   |   └── ...
  |   |   └── ...
  |   ├── molecules                  //محل ذخیره ی گروه کامپوننت ها که از ترکیب بیش از یک جزء بوجود می آید
- |   |   ├── SearchBox.tsx          //متشکل از یک ورودی و یک دکمه 
+ |   |   ├── SearchBox.tsx          //متشکل از یک ورودی و یک دکمه
  |   |   └── ...
  |   ├── organisms                  //محل ذخیره ی اجزایی مثل جدول و فرم که از ترکیب گروه کامپوننتها بوجود می آید
  |   |   ├── login.tsx              //کامپوننت فرم ورود با تمام منطق ها و validations
  |   |   ├── signout.tsx            //کامپوننت فرم ثبت نام  با تمام منطق ها و validations
  |   |   └── ...
- |   └── templates                  //محل ذخیره ی کامپوننت ها که اعضای یک صفحه هستند 
- |       ├── auth.tsx               //کامپوننتی متشکل از دو فرم که عملیات ورود و ثبت نام را هندل میکند 
+ |   └── templates                  //محل ذخیره ی کامپوننت ها که اعضای یک صفحه هستند
+ |       ├── auth.tsx               //کامپوننتی متشکل از دو فرم که عملیات ورود و ثبت نام را هندل میکند
  |       └── ...
 ```
-# قالب بندی بر اساس دستگاه 
-----
+
+# قالب بندی بر اساس دستگاه
+
+---
+
 اگر شما با موبایل به سایت وارد شوید نیازی به ساید بار ندارید.
 همچنین اگر با دسکتاپ وارد سایت شوید نیازی به navigation bar نخواهید داشت.
-از این رو برای حذف کامل المانهای غیر ضروری صفحه با توجه به user-agent موجود در header میتوان نوع دستگاه را تشخیص داده و نوع قالب بندی سایت را تغییر دهیم 
-برای انجام این کار نیاز است در لایه های بالا این مقدار را مطابق کد زیر گرفته و مقایسه کنیم و در صورت وجود یا عدم وجود شرط لایه متناسب با دستگاه را بارگزاری کنیم و از رندر اعضای مخفی شده در DOM جلوگیری به عمل آوریم. 
+از این رو برای حذف کامل المانهای غیر ضروری صفحه با توجه به user-agent موجود در header میتوان نوع دستگاه را تشخیص داده و نوع قالب بندی سایت را تغییر دهیم
+برای انجام این کار نیاز است در لایه های بالا این مقدار را مطابق کد زیر گرفته و مقایسه کنیم و در صورت وجود یا عدم وجود شرط لایه متناسب با دستگاه را بارگزاری کنیم و از رندر اعضای مخفی شده در DOM جلوگیری به عمل آوریم.
 در این پروژه یک پوشه جداگانه از کامپوننتها و صفحات برای اعضای خاص که در موبایل و دسکتاپ متغیر میباشند بوجود آورده و این مساله رو در آن پوشه مدیریت میکنیم .
 
 ```
@@ -331,7 +344,9 @@ export default async function BodyLayout({ children, params: { local } }: { chil
   );
 }
 ```
-و در نهایت در لایه اصلی دو لایه موبایل و دسکتاپ رو از همدیگر جدا میکنیم 
+
+و در نهایت در لایه اصلی دو لایه موبایل و دسکتاپ رو از همدیگر جدا میکنیم
+
 ```
 import { ReactNode } from "react";
 import "../../styles/globals.css";
@@ -356,12 +371,14 @@ const BaseLayout = (props: { children: ReactNode, viewport: string ,local:string
 }
 export default BaseLayout;
 ```
+
 .که در هر لایه مخصوص المانهایی وجود دارند که تنها در همان لایه رندر میشوند
 
-.همچنین در این لایه تمامی تامین کننده ها رو که مقادیرشان باید در تمام پروژه در دسترس باشد ،اضافه میکنیم 
+.همچنین در این لایه تمامی تامین کننده ها رو که مقادیرشان باید در تمام پروژه در دسترس باشد ،اضافه میکنیم
 
 تامین کنندگانی مثل theme ,store ,locale,...
- ```
+
+```
 'use client'
 import LOADING from "@components/atoms/LOADING";
 import Theme from "@components/templates/Theme";
@@ -371,107 +388,139 @@ import { NextIntlClientProvider } from "next-intl";
 import { usePathname } from "next/navigation";
 import { ReactNode, Suspense } from "react";
 const DesktopLayout = (props: { children: ReactNode, local: string }) => {
-    const { children, local } = props
-    const route = usePathname()
-    return (
-        <NextIntlClientProvider  locale={local}>
-        <ReduxProvider >
-            <Theme>
+   const { children, local } = props
+   const route = usePathname()
+   return (
+       <NextIntlClientProvider  locale={local}>
+       <ReduxProvider >
+           <Theme>
 
-                {
-                    route.endsWith(`/${local}`) ? <>{children}</> :
-                        <DashboardLayout>
-                            <Suspense fallback={<LOADING />}>{children}</Suspense>
-                        </DashboardLayout>
-                }
-            </Theme>
-        </ReduxProvider>
-        </NextIntlClientProvider>
-    );
+               {
+                   route.endsWith(`/${local}`) ? <>{children}</> :
+                       <DashboardLayout>
+                           <Suspense fallback={<LOADING />}>{children}</Suspense>
+                       </DashboardLayout>
+               }
+           </Theme>
+       </ReduxProvider>
+       </NextIntlClientProvider>
+   );
 }
 export default DesktopLayout
- ```
+```
+
 # public
-در این پوشه اطلاعات قابل تغییر پروژه قرار میگیرد 
->تنظیمات آدرس سرور.
 
->آیکون نرم افزار.
+در این پوشه اطلاعات قابل تغییر پروژه قرار میگیرد
 
->تنظیمات سرویس ورکر.
+> تنظیمات آدرس سرور.
 
->تنظیمات firebase.
+> آیکون نرم افزار.
 
->تنظیمات PWA.
+> تنظیمات سرویس ورکر.
+
+> تنظیمات firebase.
+
+> تنظیمات PWA.
 
 ## assets
+
 محل نگهداری عکس ها ،فونتها و آیکونها
+
 ### fonts
-محل ذخیره سازی فونتها 
+
+محل ذخیره سازی فونتها
+
 ### svgs
-محل ذخیره سازی آیکون ها برگرفته از فیگما  
-## AppSetting
+
+محل ذخیره سازی آیکون ها برگرفته از فیگما
+
+### AppSetting
+
 محل تغییر آدرس سرور ، به علت در دسترس بودن حتی بعد از build برنامه در اینجا تنظینات نگهداری میشود.
-## firebase massaging 
-محل ذخیره سازی تنظیمات سرور اعلان ها 
-## manifest 
+
+### firebase massaging
+
+محل ذخیره سازی تنظیمات سرور اعلان ها
+
+### manifest
+
 محل ذخیره سازی تنظیمات PWA
-## robots.txt
-محل تنظیمات خزنده های جستجوگر 
+
+### robots.txt
+
+محل تنظیمات خزنده های جستجوگر
 
 <!-- services -->
-## سرویس ها 
+
+## سرویس ها
 
 یکی از دو قسمت اصلی حافظه میباشد که کار مدیریت درخواستها را بر عهده دارد.
 
 از کتابخانه ی `RTK QUERY` بابت مدیریت درخواستها استفاده شده .
-در صفحه ی `index.tsx`  تمامی درخواستها ادغام میشود .
+در صفحه ی `index.tsx` تمامی درخواستها ادغام میشود .
 و به عنوان خروجی اصلی سرویس ها به `store` ارسال میشود .
 
 ### مدیریت ارور ها در پاسخ سرور
 
 همگی بصورت اعلان باید نمایش داده شوند و مدیریت آن توسط یک middleware از درون خود ریداکس کوئری رخ میدهد.
-که این middleware نیز بصورت جداگانه به `store`  ارسال میشود.
+که این middleware نیز بصورت جداگانه به `store` ارسال میشود.
 
-این رفتار توسط فایل `rtkQueryErrorLogger`مدیریت میشود
+این رفتار توسط فایل `rtkQueryErrorLogger`مدیریت میشود.
+بدین صورت که متدی داخل ریداکس وجود دارد به نام `isRejectedWithValue` که دور درخواست پیچیده میشود به شکل زیر و در صورت پاسخ ارور یک فعالیتی را انجام میدهد.
 
+```
+export const rtkQueryErrorLogger: Middleware = () => (next) => (action) => {
+  if (isRejectedWithValue(action)) {
+    if (action.payload.status !== 401) {
+        //اینجا باید یه بار رفرش توکن با سرویس لاگین صدا زده بشه و پارامتر رفرش توکن فرستاده بشه
+        //بعد اگه دوباره به همین ارور خورد پاپ اپ لاگین یا هدات شود به لندگینگ یا لاگین ...
+    showToast({message:"The HTTP status code 401, often denoted as UNAUTHORIZED , signifies that the client lacks proper authentication credentials or has provided invalid credentials. In simpler terms, the server has failed to identify the user"})
+    }
+  }
+  return next(action);
+};
 
+```
 
+همچنین در قسمت middleware به store اضافه میگردد.
 
+const ServiceRootReducer = () => {
 
+    return {
+        serviceReducer: {
+            [comAuth.reducerPath]: comAuth.reducer,
+            [ComAuthToken.reducerPath]: ComAuthToken.reducer,
+        },
+        serviceMiddleware: [
+            comAuth.middleware,
+            ComAuthToken.middleware,
+            `rtkQueryErrorLogger`
+        ]
 
+    }
 
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+export default ServiceRootReducer;
 
 # Markdown syntax guide
 
 ## Headers
 
 # This is a Heading h1
+
 ## This is a Heading h2
+
 ###### This is a Heading h6
 
 ## Emphasis
 
-*This text will be italic*  
+_This text will be italic_  
 _This will also be italic_
 
 **This text will be bold**  
-__This will also be bold__
+**This will also be bold**
 
 _You **can** combine them_
 
@@ -479,18 +528,18 @@ _You **can** combine them_
 
 ### Unordered
 
-* Item 1
-* Item 2
-* Item 2a
-* Item 2b
+- Item 1
+- Item 2
+- Item 2a
+- Item 2b
 
 ### Ordered
 
 1. Item 1
 2. Item 2
 3. Item 3
-    1. Item 3a
-    2. Item 3b
+   1. Item 3a
+   2. Item 3b
 
 ## Images
 
@@ -504,15 +553,15 @@ You may be using [Markdown Live Preview](https://markdownlivepreview.com/).
 
 > Markdown is a lightweight markup language with plain-text-formatting syntax, created in 2004 by John Gruber with Aaron Swartz.
 >
->> Markdown is often used to format readme files, for writing messages in online discussion forums, and to create rich text using a plain text editor.
+> > Markdown is often used to format readme files, for writing messages in online discussion forums, and to create rich text using a plain text editor.
 
 ## Tables
 
-| Left columns  | Right columns |
-| ------------- |:-------------:|
-| left foo      | right foo     |
-| left bar      | right bar     |
-| left baz      | right baz     |
+| Left columns | Right columns |
+| ------------ | :-----------: |
+| left foo     |   right foo   |
+| left bar     |   right bar   |
+| left baz     |   right baz   |
 
 ## Blocks of code
 
@@ -524,6 +573,7 @@ alert(message);
 ## Inline code
 
 This web site is using `markedjs/marked`.
+
 # Markdown Cheatsheet<a name="TOP"></a>
 
 ---
