@@ -787,7 +787,32 @@ firebase.ts
 سپس تابع واکشی پیغام ها اجرا خواهد شد.
 > firebaseCloudMessaging.getMessage()
 
-که در نهایت این فایل firebase.ts در لایه ی providers صدا زده شده.
+که در نهایت این فایل firebase.ts در لایه ی providers صدا زده شده. `layout/providers`
+
+```
+"use client"
+import Theme from "@components/templates/Theme";
+import ReduxProvider from "@redux/Provider";
+import { NextIntlClientProvider } from "next-intl";
+import { ReactNode } from "react";
+import { registerFirebase } from "@utils/firebaseLogic";
+const Providers = (props: { local: string, children: ReactNode }) => {
+    const { children, local } = props
+    registerFirebase()      // در این قسمت تابع رجیستر فایر بیس فراخوانی میشود
+    return (
+        <NextIntlClientProvider locale={local}>
+            <ReduxProvider>
+                <Theme>
+                    {children}
+                </Theme>
+            </ReduxProvider>
+        </NextIntlClientProvider>
+
+    );
+}
+
+export default Providers;
+```
 
 
 
